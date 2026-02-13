@@ -1,18 +1,18 @@
-import {
-  Home,
-  Building2,
-  ArrowUpCircle,
-  TrendingUp,
-  Hammer,
-  Wrench,
-  Link2,
-} from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import CompassIcon from "@/components/CompassIcon";
+import {
+  HomePurchaseIcon,
+  AffordableHousingIcon,
+  HomeUpgradeIcon,
+  InvestorIcon,
+  SelfBuildIcon,
+  RenovationIcon,
+  LoanConsolidationIcon,
+} from "@/components/ServiceIcons";
 
 const services = [
   {
-    icon: Home,
+    icon: HomePurchaseIcon,
     title: "רכישת דירה",
     description:
       'בניית תמהיל משכנתא מותאם להכנסה, ניהול מו"מ מול מספר בנקים לקבלת התנאים הטובים ביותר.',
@@ -21,7 +21,7 @@ const services = [
     iconColor: "text-emerald-600",
   },
   {
-    icon: Building2,
+    icon: AffordableHousingIcon,
     title: "מחיר למשתכן / מחיר מטרה",
     description:
       "ליווי משלב הזכייה ועד חתימה, פתרונות גרייס והלוואות ביניים מותאמות.",
@@ -30,7 +30,7 @@ const services = [
     iconColor: "text-blue-600",
   },
   {
-    icon: ArrowUpCircle,
+    icon: HomeUpgradeIcon,
     title: "משפרי דיור",
     description:
       "תכנון פיננסי למכירה וקנייה במקביל, הבטחת רצף כלכלי חלק.",
@@ -39,7 +39,7 @@ const services = [
     iconColor: "text-sky-600",
   },
   {
-    icon: TrendingUp,
+    icon: InvestorIcon,
     title: "משקיעים",
     description:
       "התאמת משכנתא למינוף נכון ויצירת תזרים חודשי ברור.",
@@ -48,7 +48,7 @@ const services = [
     iconColor: "text-amber-600",
   },
   {
-    icon: Hammer,
+    icon: SelfBuildIcon,
     title: "משכנתא לבנייה עצמית",
     description:
       "ליווי מהתכנון ועד לשחרור כספים, תיאום מול הבנקים בכל שלב.",
@@ -57,7 +57,7 @@ const services = [
     iconColor: "text-orange-600",
   },
   {
-    icon: Wrench,
+    icon: RenovationIcon,
     title: "משכנתא לשיפוץ",
     description:
       "מימון יעיל עם תזרים מותאם לפרויקט השיפוץ שלכם.",
@@ -66,7 +66,7 @@ const services = [
     iconColor: "text-rose-600",
   },
   {
-    icon: Link2,
+    icon: LoanConsolidationIcon,
     title: "איחוד הלוואות",
     description:
       "סגירת מינוסים והלוואות יקרות, הורדת החזר חודשי משמעותית.",
