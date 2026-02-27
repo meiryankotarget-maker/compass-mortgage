@@ -1,74 +1,13 @@
+import { Link } from "react-router-dom";
 import ScrollReveal from "@/components/ScrollReveal";
 import CompassIcon from "@/components/CompassIcon";
-import {
-  HomePurchaseIcon,
-  AffordableHousingIcon,
-  HomeUpgradeIcon,
-  InvestorIcon,
-  SelfBuildIcon,
-  RenovationIcon,
-  LoanConsolidationIcon,
-} from "@/components/ServiceIcons";
+import { services } from "@/data/services";
 import { motion } from "framer-motion";
-import { useRef } from "react";
-import { MapPin, Phone, MessageCircle } from "lucide-react";
-
-const services = [
-  {
-    icon: HomePurchaseIcon,
-    title: "רכישת דירה",
-    description:
-      'בניית תמהיל משכנתא מותאם להכנסה, ניהול מו"מ מול מספר בנקים לקבלת התנאים הטובים ביותר.',
-  },
-  {
-    icon: AffordableHousingIcon,
-    title: "מחיר למשתכן / מחיר מטרה",
-    description:
-      "ליווי משלב הזכייה ועד חתימה, פתרונות גרייס והלוואות ביניים מותאמות.",
-  },
-  {
-    icon: HomeUpgradeIcon,
-    title: "משפרי דיור",
-    description:
-      "תכנון פיננסי למכירה וקנייה במקביל, הבטחת רצף כלכלי חלק.",
-  },
-  {
-    icon: InvestorIcon,
-    title: "משקיעים",
-    description:
-      "התאמת משכנתא למינוף נכון ויצירת תזרים חודשי ברור.",
-  },
-  {
-    icon: SelfBuildIcon,
-    title: "משכנתא לבנייה עצמית",
-    description:
-      "ליווי מהתכנון ועד לשחרור כספים, תיאום מול הבנקים בכל שלב.",
-  },
-  {
-    icon: RenovationIcon,
-    title: "משכנתא לשיפוץ",
-    description:
-      "מימון יעיל עם תזרים מותאם לפרויקט השיפוץ שלכם.",
-  },
-  {
-    icon: LoanConsolidationIcon,
-    title: "איחוד הלוואות",
-    description:
-      "סגירת מינוסים והלוואות יקרות, הורדת החזר חודשי משמעותית.",
-  },
-];
-
+import { MapPin, Phone, MessageCircle, ArrowLeft } from "lucide-react";
 
 const ServicesSection = () => {
-  const sectionRef = useRef(null);
-
   return (
-    <section
-      id="services"
-      ref={sectionRef}
-      className="relative overflow-hidden"
-    >
-
+    <section id="services" className="relative overflow-hidden">
       {/* ===== SERVICES GRID ===== */}
       <div className="relative bg-gradient-to-b from-navy-dark to-primary py-20 lg:py-28">
         {/* Subtle dot grid */}
@@ -125,7 +64,7 @@ const ServicesSection = () => {
               ))}
             </div>
             <p className="text-center text-xs text-white/30 mt-3">
-              מפת המסלולים שלנו • 7 תחנות יעד
+              מפת המסלולים שלנו • {services.length} תחנות יעד
             </p>
           </ScrollReveal>
         </div>
@@ -144,39 +83,35 @@ interface ServiceCardProps {
 }
 
 const ServiceCard = ({ service, index }: ServiceCardProps) => (
-  <motion.div
-    whileHover={{ y: -6, scale: 1.02 }}
-    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-    className="relative p-6 rounded-xl border border-white/10 bg-white/[0.04] backdrop-blur-sm hover:border-gold/30 transition-colors duration-300 group h-full cursor-default"
-  >
-    {/* Station number */}
-    <div className="absolute -top-3 -right-3 w-7 h-7 rounded-full bg-gold flex items-center justify-center shadow-lg shadow-gold/20">
-      <span className="text-[10px] font-bold text-navy-dark">
-        {String(index + 1).padStart(2, "0")}
-      </span>
-    </div>
+  <Link to={`/services/${service.slug}`} className="block h-full">
+    <motion.div
+      whileHover={{ y: -6, scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      className="relative p-6 rounded-xl border border-white/10 bg-white/[0.04] backdrop-blur-sm hover:border-gold/30 transition-colors duration-300 group h-full cursor-pointer"
+    >
+      {/* Station number */}
+      <div className="absolute -top-3 -right-3 w-7 h-7 rounded-full bg-gold flex items-center justify-center shadow-lg shadow-gold/20">
+        <span className="text-[10px] font-bold text-navy-dark">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+      </div>
 
-    {/* Icon */}
-    <div className="w-14 h-14 rounded-lg border border-gold/20 bg-gold/[0.06] flex items-center justify-center mb-5 group-hover:border-gold/40 group-hover:bg-gold/[0.1] transition-all duration-300">
-      <service.icon className="text-gold" size={28} />
-    </div>
+      {/* Icon */}
+      <div className="w-14 h-14 rounded-lg border border-gold/20 bg-gold/[0.06] flex items-center justify-center mb-5 group-hover:border-gold/40 group-hover:bg-gold/[0.1] transition-all duration-300">
+        <service.icon className="text-gold" size={28} />
+      </div>
 
-    {/* Content */}
-    <h4 className="text-lg font-bold text-white mb-2">{service.title}</h4>
-    <p className="text-sm text-white/50 leading-relaxed">{service.description}</p>
+      {/* Content */}
+      <h4 className="text-lg font-bold text-white mb-2">{service.title}</h4>
+      <p className="text-sm text-white/50 leading-relaxed">{service.description}</p>
 
-    {/* Bottom route line */}
-    <div className="mt-5 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-      <div className="w-2 h-2 rounded-full bg-gold/50" />
-      <div
-        className="h-px flex-1"
-        style={{
-          backgroundImage: `repeating-linear-gradient(90deg, hsl(var(--gold) / 0.3) 0, hsl(var(--gold) / 0.3) 4px, transparent 4px, transparent 8px)`,
-        }}
-      />
-      <span className="text-[10px] text-white/30 font-mono">תחנה {String(index + 1).padStart(2, "0")}</span>
-    </div>
-  </motion.div>
+      {/* CTA hint */}
+      <div className="mt-5 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <span className="text-xs text-accent font-medium">קרא עוד</span>
+        <ArrowLeft size={14} className="text-accent" />
+      </div>
+    </motion.div>
+  </Link>
 );
 
 /* ---- Sticky Contact Bar ---- */
