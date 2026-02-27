@@ -9,7 +9,7 @@ import {
   RenovationIcon,
   LoanConsolidationIcon,
 } from "@/components/ServiceIcons";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRef } from "react";
 import { MapPin, Phone, MessageCircle } from "lucide-react";
 
@@ -58,22 +58,9 @@ const services = [
   },
 ];
 
-const highlights = [
-  { icon: "compass", text: "ניווט ברור ומדויק בכל סוגי המשכנתאות" },
-  { icon: "savings", text: "חיסכון מוכח בכסף ובהחזר החודשי" },
-  { icon: "map", text: "הסברים פשוטים ובהירים על מסלולים וריביות" },
-  { icon: "phone", text: 'ליווי אישי לכל שלב, כולל מו"מ עם הבנקים' },
-  { icon: "route", text: "ניסיון במקרים מורכבים ובמשכנתאות מיוחדות" },
-];
 
 const ServicesSection = () => {
   const sectionRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  const compassRotate = useTransform(scrollYProgress, [0, 1], [0, 120]);
 
   return (
     <section
@@ -81,100 +68,6 @@ const ServicesSection = () => {
       ref={sectionRef}
       className="relative overflow-hidden"
     >
-      {/* ===== HERO AREA ===== */}
-      <div className="relative bg-navy-gradient py-24 lg:py-32">
-        {/* Topographic watermark background */}
-        <div className="absolute inset-0 opacity-[0.04]">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--gold) / 0.5) 1px, transparent 0)`,
-              backgroundSize: "50px 50px",
-            }}
-          />
-        </div>
-
-        {/* Large compass watermark - left side */}
-        <motion.div
-          className="absolute left-[-5%] top-1/2 -translate-y-1/2 opacity-[0.06] hidden lg:block"
-          style={{ rotate: compassRotate }}
-        >
-          <CompassIcon size={600} className="text-gold" />
-        </motion.div>
-
-        {/* Topographic SVG lines */}
-        <svg
-          className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.03]"
-          preserveAspectRatio="none"
-          viewBox="0 0 1200 800"
-        >
-          <path d="M0 200 Q300 150 600 250 T1200 200" stroke="hsl(var(--gold))" strokeWidth="2" fill="none" />
-          <path d="M0 400 Q400 350 700 420 T1200 380" stroke="hsl(var(--gold))" strokeWidth="1.5" fill="none" />
-          <path d="M0 600 Q250 550 500 630 T1200 580" stroke="hsl(var(--gold))" strokeWidth="1" fill="none" />
-        </svg>
-
-        <div className="container mx-auto px-4 lg:px-8 relative z-10">
-          {/* Small compass icon top-right */}
-          <div className="flex justify-end mb-8">
-            <motion.div
-              animate={{ rotate: [0, 10, -10, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <CompassIcon size={48} className="text-gold opacity-80" />
-            </motion.div>
-          </div>
-
-          {/* Title */}
-          <ScrollReveal>
-            <div className="text-right max-w-3xl mr-auto lg:mr-[40%]">
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-3">
-                <span className="text-gradient-gold">מצפן</span>{" "}
-                <span className="text-white">משכנתאות</span>
-              </h2>
-              <p className="text-gold text-lg md:text-xl font-medium mb-6">
-                הכיוון הנכון למשכנתא שלך
-              </p>
-              <p className="text-white/70 text-base md:text-lg leading-relaxed max-w-2xl">
-                כמו מצפן שמכוון לצפון – אנחנו מכוונים אתכם להחלטה הפיננסית הנכונה.
-                ליווי מקצועי, שקיפות מלאה ותכנון מדויק. בכל שלב, אתם יודעים לאן אתם
-                פונים ומה המסלול, ואנחנו כאן כדי לוודא שתגיעו ליעד בלי עיכובים וטעויות.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          {/* CTA Buttons */}
-          <ScrollReveal delay={0.2}>
-            <div className="flex flex-wrap items-center gap-4 mt-10 justify-start">
-              <button className="bg-gold-gradient text-navy-dark font-bold px-8 py-3.5 rounded-full flex items-center gap-2 hover:opacity-90 transition-opacity shadow-lg shadow-gold/20">
-                <MapPin size={18} />
-                השאר פרטים
-              </button>
-              <button className="border border-white/30 text-white font-medium px-8 py-3.5 rounded-full flex items-center gap-2 hover:bg-white/10 transition-colors">
-                <Phone size={18} />
-                קבע שיחת טלפון
-              </button>
-              <button className="text-white/70 font-medium px-6 py-3.5 flex items-center gap-2 hover:text-white transition-colors">
-                <MessageCircle size={18} />
-                שלח וואטסאפ
-              </button>
-            </div>
-          </ScrollReveal>
-
-          {/* Highlight points */}
-          <ScrollReveal delay={0.4}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 mt-16 max-w-4xl">
-              {highlights.map((item, i) => (
-                <div key={i} className="flex items-center gap-3 text-right">
-                  <span className="text-sm text-white/80 leading-relaxed">{item.text}</span>
-                  <div className="w-9 h-9 rounded-full border border-gold/50 flex items-center justify-center flex-shrink-0">
-                    <HighlightIcon type={item.icon} />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
-        </div>
-      </div>
 
       {/* ===== SERVICES GRID ===== */}
       <div className="relative bg-gradient-to-b from-navy-dark to-primary py-20 lg:py-28">
@@ -316,49 +209,5 @@ const StickyContactBar = () => (
     </div>
   </div>
 );
-
-/* ---- Highlight Icons ---- */
-const HighlightIcon = ({ type }: { type: string }) => {
-  const cls = "text-gold w-4 h-4";
-  switch (type) {
-    case "compass":
-      return (
-        <svg viewBox="0 0 24 24" fill="none" className={cls}>
-          <path d="M3 11l9-9 9 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-          <path d="M5 11v8a2 2 0 002 2h10a2 2 0 002-2v-8" stroke="currentColor" strokeWidth="2" />
-        </svg>
-      );
-    case "savings":
-      return (
-        <svg viewBox="0 0 24 24" fill="none" className={cls}>
-          <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2" />
-          <path d="M12 7v10M9 10l3-3 3 3M9 14l3 3 3-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        </svg>
-      );
-    case "map":
-      return (
-        <svg viewBox="0 0 24 24" fill="none" className={cls}>
-          <path d="M3 7l6-3 6 3 6-3v13l-6 3-6-3-6 3V7z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
-          <path d="M9 4v13M15 7v13" stroke="currentColor" strokeWidth="2" />
-        </svg>
-      );
-    case "phone":
-      return (
-        <svg viewBox="0 0 24 24" fill="none" className={cls}>
-          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="currentColor" strokeWidth="2" />
-        </svg>
-      );
-    case "route":
-      return (
-        <svg viewBox="0 0 24 24" fill="none" className={cls}>
-          <polygon points="12,2 10,10 14,10" fill="currentColor" />
-          <polygon points="12,22 10,14 14,14" fill="currentColor" opacity="0.3" />
-          <circle cx="12" cy="12" r="2" fill="currentColor" />
-        </svg>
-      );
-    default:
-      return null;
-  }
-};
 
 export default ServicesSection;
