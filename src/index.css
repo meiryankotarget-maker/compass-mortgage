@@ -123,6 +123,15 @@
   .glass-card {
     @apply bg-card/80 backdrop-blur-sm border border-border/50 rounded-xl shadow-lg;
   }
+
+  .timeline-node {
+    box-shadow: 0 0 18px 4px hsl(38 80% 52% / 0.15), 0 0 6px 1px hsl(38 80% 52% / 0.1);
+    transition: box-shadow 0.5s ease;
+  }
+
+  .group:hover .timeline-node {
+    box-shadow: 0 0 24px 8px hsl(38 80% 52% / 0.25), 0 0 10px 2px hsl(38 80% 52% / 0.18);
+  }
 }
 
 @layer utilities {
