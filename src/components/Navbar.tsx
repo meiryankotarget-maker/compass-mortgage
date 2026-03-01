@@ -1,19 +1,23 @@
 import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Compass, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import CompassIcon from "@/components/CompassIcon";
 
-const navLinks = [
+const navLinks: { label: string; href: string; isRoute?: boolean }[] = [
   { label: "ראשי", href: "#hero" },
   { label: "שירותים", href: "#services" },
   { label: "תהליך עבודה", href: "#process" },
   { label: "אודות", href: "#about" },
   { label: "שאלות נפוצות", href: "#faq" },
+  { label: "בלוג", href: "/blog", isRoute: true },
 ];
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -21,8 +25,16 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollTo = (href: string) => {
+  const handleNavClick = (href: string, isRoute?: boolean) => {
     setIsMobileMenuOpen(false);
+    if (isRoute) {
+      navigate(href);
+      return;
+    }
+    if (location.pathname !== "/") {
+      navigate("/" + href);
+      return;
+    }
     const el = document.querySelector(href);
     el?.scrollIntoView({ behavior: "smooth" });
   };
@@ -39,7 +51,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <button
-            onClick={() => scrollTo("#hero")}
+            onClick={() => handleNavClick("#hero")}
             className="flex items-center gap-2 group"
           >
             <CompassIcon
@@ -62,7 +74,7 @@ const Navbar = () => {
             {navLinks.map((link) => (
               <button
                 key={link.href}
-                onClick={() => scrollTo(link.href)}
+                onClick={() => handleNavClick(link.href, link.isRoute)}
                 className={`text-sm font-medium transition-colors duration-300 hover:text-accent relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-[-4px] after:right-0 after:bg-accent after:origin-bottom-left after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-right ${
                   isScrolled
                     ? "text-foreground/70"
@@ -75,7 +87,7 @@ const Navbar = () => {
             <Button
               variant="gold"
               size="sm"
-              onClick={() => scrollTo("#cta")}
+              onClick={() => handleNavClick("#cta")}
             >
               השאר פרטים
             </Button>
@@ -107,7 +119,7 @@ const Navbar = () => {
               {navLinks.map((link) => (
                 <button
                   key={link.href}
-                  onClick={() => scrollTo(link.href)}
+                  onClick={() => handleNavClick(link.href, link.isRoute)}
                   className="text-sm font-medium text-foreground/80 hover:text-accent transition-colors text-right py-2"
                 >
                   {link.label}
@@ -117,7 +129,7 @@ const Navbar = () => {
                 variant="gold"
                 size="sm"
                 className="mt-2"
-                onClick={() => scrollTo("#cta")}
+                onClick={() => handleNavClick("#cta")}
               >
                 השאר פרטים
               </Button>
