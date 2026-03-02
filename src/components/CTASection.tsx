@@ -1,9 +1,22 @@
 import { MapPin, Phone, MessageCircle, Compass } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import ScrollReveal from "@/components/ScrollReveal";
 import CompassIcon from "@/components/CompassIcon";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 const CTASection = () => {
+  const { toast } = useToast();
+  const [formData, setFormData] = useState({ name: "", phone: "", message: "" });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    toast({ title: "הפרטים נשלחו בהצלחה!", description: "ניצור אתכם קשר בהקדם." });
+    setFormData({ name: "", phone: "", message: "" });
+  };
+
   return (
     <section
       id="cta"
@@ -29,27 +42,55 @@ const CTASection = () => {
 
           <ScrollReveal delay={0.2}>
             <p className="text-lg text-primary-foreground/60 mb-10 max-w-xl mx-auto">
-              ניצור קשר בהקדם, נבנה תמהיל מותאם עבורך ונראה איפה אפשר לחסוך
-              כסף וריביות.
+              השאירו פרטים ונחזור אליכם עם ייעוץ מותאם אישית
             </p>
+          </ScrollReveal>
+
+          {/* Contact Form */}
+          <ScrollReveal delay={0.25}>
+            <form onSubmit={handleSubmit} className="glass-card p-8 space-y-5 text-right max-w-2xl mx-auto mb-10">
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-primary-foreground/80 mb-1.5">שם מלא</label>
+                  <Input
+                    placeholder="ישראל ישראלי"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    required
+                    className="text-right bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/40"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-primary-foreground/80 mb-1.5">טלפון</label>
+                  <Input
+                    placeholder="050-0000000"
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    required
+                    className="text-right bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/40"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-primary-foreground/80 mb-1.5">הודעה (אופציונלי)</label>
+                <Textarea
+                  placeholder="ספרו לנו קצת על הצרכים שלכם..."
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  className="text-right bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/40"
+                  rows={4}
+                />
+              </div>
+              <Button variant="gold" size="lg" className="w-full text-base" type="submit">
+                <MapPin className="!size-5" />
+                שלחו פרטים
+              </Button>
+            </form>
           </ScrollReveal>
 
           <ScrollReveal delay={0.3}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button
-                variant="gold"
-                size="lg"
-                className="text-base px-10 min-w-[200px] animate-pulse-gold"
-                onClick={() =>
-                  document
-                    .querySelector("#contact-form")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-              >
-                <MapPin className="!size-5" />
-                השאר פרטים עכשיו
-              </Button>
-
               <Button
                 variant="gold-outline"
                 size="lg"
