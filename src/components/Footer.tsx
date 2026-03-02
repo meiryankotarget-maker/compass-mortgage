@@ -55,11 +55,11 @@ const Footer = () => {
             </h4>
             <div className="flex flex-col gap-3">
               <a
-                href="tel:+972500000000"
+                href="tel:+972556883590"
                 className="flex items-center gap-2 text-sm text-primary-foreground/50 hover:text-accent transition-colors"
               >
                 <Phone size={14} />
-                <span>050-000-0000</span>
+                <span>055-688-3590</span>
               </a>
               <a
                 href="mailto:info@compass-mortgage.co.il"
