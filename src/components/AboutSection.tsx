@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { Shield, Clock, MessageSquare, Handshake, Award, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -15,66 +15,108 @@ const differentiators = [
 
 const clockAngles = [0, 60, 120, 180, 240, 300];
 
-const CompassWithIcons = ({ size, orbitRadius, iconSize, fontSize, needleRotation, activeIndex, onIconClick }: {
-  size: number;
+const CompassWithIcons = ({
+  compassSize,
+  orbitRadius,
+  iconSize,
+  fontSize,
+  needleRotation,
+  activeIndex,
+  onIconClick,
+}: {
+  compassSize: number;
   orbitRadius: number;
   iconSize: number;
-  fontSize: string;
+  fontSize: number;
   needleRotation: number;
   activeIndex: number | null;
   onIconClick: (i: number) => void;
 }) => {
-  const totalSize = size + (orbitRadius + iconSize) * 2;
+  const containerSize = compassSize + (orbitRadius + iconSize + 20) * 2;
+
   return (
-  <div className="relative flex items-center justify-center" style={{ width: totalSize, height: totalSize }}>
-    {/* Compass center - absolutely centered */}
-    <div className="absolute" style={{ left: "50%", top: "50%", transform: "translate(-50%, -50%)" }}>
-      <CompassIcon size={size} className="text-foreground/80" needleRotation={needleRotation} />
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="rounded-full border border-accent/20 animate-pulse-gold" style={{ width: size * 0.71, height: size * 0.71 }} />
-      </div>
-    </div>
-
-    {/* Orbiting icons */}
-    {differentiators.map((item, i) => {
-      const angleRad = (clockAngles[i] - 90) * (Math.PI / 180);
-      const x = Math.cos(angleRad) * orbitRadius;
-      const y = Math.sin(angleRad) * orbitRadius;
-      const isActive = activeIndex === i;
-
-      return (
-        <motion.button
-          key={i}
-          className="absolute flex flex-col items-center gap-1 cursor-pointer group focus:outline-none"
+    <div
+      style={{
+        position: "relative",
+        width: containerSize,
+        height: containerSize,
+      }}
+    >
+      {/* Compass - absolutely centered */}
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
+        <CompassIcon size={compassSize} className="text-foreground/80" needleRotation={needleRotation} />
+        <div
           style={{
-            left: `calc(50% + ${x}px)`,
-            top: `calc(50% + ${y}px)`,
-            transform: "translate(-50%, -50%)",
+            position: "absolute",
+            inset: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
-          onClick={() => onIconClick(i)}
-          animate={{ y: [0, -5, 0] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }}
-          whileHover={{ scale: 1.15 }}
-          whileTap={{ scale: 0.95 }}
         >
-          <div className={`rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
-            isActive
-              ? "bg-accent border-accent shadow-lg shadow-accent/30"
-              : "bg-card/80 backdrop-blur-sm border-border/50 group-hover:border-accent/60"
-          }`} style={{ width: iconSize, height: iconSize }}>
-            <item.icon
-              className={`transition-colors duration-300 ${isActive ? "text-accent-foreground" : "text-accent"}`}
-              size={iconSize * 0.42}
-            />
-          </div>
-          <span className={`font-semibold whitespace-nowrap transition-colors duration-300 ${isActive ? "text-accent" : "text-muted-foreground"}`}
-            style={{ fontSize }}>
-            {item.text}
-          </span>
-        </motion.button>
-      );
-    })}
-  </div>
+          <div
+            className="rounded-full border border-accent/20 animate-pulse-gold"
+            style={{ width: compassSize * 0.71, height: compassSize * 0.71 }}
+          />
+        </div>
+      </div>
+
+      {/* Icons - each absolutely positioned from center */}
+      {differentiators.map((item, i) => {
+        const angleRad = (clockAngles[i] - 90) * (Math.PI / 180);
+        const x = Math.cos(angleRad) * orbitRadius;
+        const y = Math.sin(angleRad) * orbitRadius;
+        const isActive = activeIndex === i;
+
+        return (
+          <motion.button
+            key={i}
+            onClick={() => onIconClick(i)}
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: 4,
+            }}
+            animate={{ y: [0, -5, 0] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }}
+            whileHover={{ scale: 1.15 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <div
+              className={`rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
+                isActive
+                  ? "bg-accent border-accent shadow-lg shadow-accent/30"
+                  : "bg-card/80 backdrop-blur-sm border-border/50 hover:border-accent/60"
+              }`}
+              style={{ width: iconSize, height: iconSize }}
+            >
+              <item.icon
+                className={isActive ? "text-accent-foreground" : "text-accent"}
+                size={iconSize * 0.4}
+              />
+            </div>
+            <span
+              className={`font-semibold whitespace-nowrap ${isActive ? "text-accent" : "text-muted-foreground"}`}
+              style={{ fontSize }}
+            >
+              {item.text}
+            </span>
+          </motion.button>
+        );
+      })}
+    </div>
   );
 };
 
@@ -89,32 +131,34 @@ const AboutSection = () => {
 
   return (
     <section id="about" className="py-24 lg:py-32 relative overflow-hidden">
-      {/* Background pattern */}
       <div className="absolute inset-0 opacity-[0.02]">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, hsl(215 55% 18%) 1px, transparent 0)`,
-          backgroundSize: "50px 50px",
-        }} />
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, hsl(215 55% 18%) 1px, transparent 0)`,
+            backgroundSize: "50px 50px",
+          }}
+        />
       </div>
 
       <div className="container mx-auto px-4 lg:px-8 relative">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-            {/* Visual side - Desktop only (large) */}
+            {/* Desktop compass */}
             <ScrollReveal direction="right" className="order-2 lg:order-1 hidden lg:flex justify-center">
               <CompassWithIcons
-                size={280}
-                orbitRadius={160}
+                compassSize={260}
+                orbitRadius={170}
                 iconSize={48}
-                fontSize="10px"
+                fontSize={10}
                 needleRotation={needleRotation}
                 activeIndex={activeIndex}
                 onIconClick={handleIconClick}
               />
             </ScrollReveal>
 
-            {/* Content side */}
+            {/* Content */}
             <div className="order-1 lg:order-2">
               <ScrollReveal>
                 <div className="flex items-center gap-3 mb-4">
@@ -158,13 +202,13 @@ const AboutSection = () => {
             </div>
           </div>
 
-          {/* Mobile compass - shown below content */}
+          {/* Mobile compass */}
           <ScrollReveal delay={0.3} className="flex justify-center mt-10 lg:hidden">
             <CompassWithIcons
-              size={160}
-              orbitRadius={130}
-              iconSize={34}
-              fontSize="9px"
+              compassSize={160}
+              orbitRadius={120}
+              iconSize={36}
+              fontSize={9}
               needleRotation={needleRotation}
               activeIndex={activeIndex}
               onIconClick={handleIconClick}
