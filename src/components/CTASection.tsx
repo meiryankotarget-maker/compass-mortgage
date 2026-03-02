@@ -48,37 +48,37 @@ const CTASection = () => {
 
           {/* Contact Form */}
           <ScrollReveal delay={0.25}>
-            <form onSubmit={handleSubmit} className="glass-card p-8 space-y-5 text-right max-w-2xl mx-auto mb-10">
+            <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-8 space-y-5 text-right max-w-2xl mx-auto mb-10 shadow-lg">
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-primary-foreground/80 mb-1.5">שם מלא</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">שם מלא</label>
                   <Input
                     placeholder="ישראל ישראלי"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     required
-                    className="text-right bg-white/15 border-white/40 text-white placeholder:text-white/50 focus:border-accent"
+                    className="text-right bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/40"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-primary-foreground/80 mb-1.5">טלפון</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">טלפון</label>
                   <Input
                     placeholder="050-0000000"
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     required
-                    className="text-right bg-white/15 border-white/40 text-white placeholder:text-white/50 focus:border-accent"
+                    className="text-right bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/40"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-primary-foreground/80 mb-1.5">הודעה (אופציונלי)</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1.5">הודעה (אופציונלי)</label>
                 <Textarea
                   placeholder="ספרו לנו קצת על הצרכים שלכם..."
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="text-right bg-white/15 border-white/40 text-white placeholder:text-white/50 focus:border-accent"
+                  className="text-right bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/40"
                   rows={4}
                 />
               </div>
