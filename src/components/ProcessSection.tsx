@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
+import compassBg from "@/assets/compass-bg.png";
 import {
   Compass,
   FolderOpen,
@@ -66,70 +67,18 @@ const steps = [
 /* Large background compass with scroll-driven needle */
 const ParallaxCompass = ({ scrollYProgress }: { scrollYProgress: any }) => {
   const y = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
-  const needleRotate = useTransform(scrollYProgress, [0, 1], ["-15deg", "25deg"]);
 
   return (
     <motion.div
-      className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-[15%] pointer-events-none hidden lg:block"
+      className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-[10%] pointer-events-none hidden lg:block"
       style={{ y }}
     >
-      <svg
-        width="700"
-        height="700"
-        viewBox="0 0 100 100"
-        fill="none"
-        className="opacity-[0.06]"
-      >
-        {/* Outer rings */}
-        <circle cx="50" cy="50" r="48" stroke="hsl(38 80% 52%)" strokeWidth="0.8" opacity="0.5" />
-        <circle cx="50" cy="50" r="46" stroke="hsl(38 80% 52%)" strokeWidth="0.4" opacity="0.3" />
-        <circle cx="50" cy="50" r="42" stroke="hsl(38 80% 52%)" strokeWidth="0.3" opacity="0.2" />
-
-        {/* Tick marks */}
-        {Array.from({ length: 36 }).map((_, i) => {
-          const angle = (i * 10 * Math.PI) / 180;
-          const isMajor = i % 9 === 0;
-          const r1 = isMajor ? 38 : 40;
-          const r2 = 43;
-          return (
-            <line
-              key={i}
-              x1={50 + r1 * Math.sin(angle)}
-              y1={50 - r1 * Math.cos(angle)}
-              x2={50 + r2 * Math.sin(angle)}
-              y2={50 - r2 * Math.cos(angle)}
-              stroke="hsl(38 80% 52%)"
-              strokeWidth={isMajor ? "1" : "0.4"}
-              opacity={isMajor ? "0.6" : "0.25"}
-            />
-          );
-        })}
-
-        {/* Cross lines */}
-        <line x1="50" y1="12" x2="50" y2="88" stroke="hsl(38 80% 52%)" strokeWidth="0.3" opacity="0.15" />
-        <line x1="12" y1="50" x2="88" y2="50" stroke="hsl(38 80% 52%)" strokeWidth="0.3" opacity="0.15" />
-
-        {/* Static east/west needles */}
-        <polygon points="86,50 52,44 52,56" fill="hsl(38 80% 52%)" opacity="0.2" />
-        <polygon points="14,50 48,44 48,56" fill="hsl(38 80% 52%)" opacity="0.2" />
-
-        {/* Center circle */}
-        <circle cx="50" cy="50" r="5" fill="hsl(38 80% 52%)" opacity="0.4" />
-        <circle cx="50" cy="50" r="3" fill="hsl(38 80% 38%)" opacity="0.5" />
-      </svg>
-
-      {/* Rotating needle overlay */}
-      <motion.svg
-        width="700"
-        height="700"
-        viewBox="0 0 100 100"
-        fill="none"
-        className="absolute inset-0 opacity-[0.06]"
-        style={{ rotate: needleRotate }}
-      >
-        <polygon points="50,14 44,48 56,48" fill="hsl(38 80% 52%)" opacity="0.7" />
-        <polygon points="50,86 44,52 56,52" fill="hsl(38 80% 52%)" opacity="0.3" />
-      </motion.svg>
+      <img
+        src={compassBg}
+        alt=""
+        className="w-[650px] h-[650px] object-contain opacity-[0.15]"
+        draggable={false}
+      />
     </motion.div>
   );
 };
