@@ -114,13 +114,13 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden pb-4 border-t border-border/30 mt-2">
+          <div className="lg:hidden pb-4 border-t border-border/30 mt-2 bg-card/95 backdrop-blur-md rounded-b-xl">
             <div className="flex flex-col gap-3 pt-4">
               {navLinks.map((link) => (
                 <button
                   key={link.href}
                   onClick={() => handleNavClick(link.href, link.isRoute)}
-                  className="text-sm font-medium text-foreground/80 hover:text-accent transition-colors text-right py-2"
+                  className="text-sm font-medium text-foreground hover:text-accent transition-colors text-right py-2"
                 >
                   {link.label}
                 </button>
