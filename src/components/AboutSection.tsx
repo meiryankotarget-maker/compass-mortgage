@@ -57,7 +57,7 @@ const AboutSection = () => {
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Visual side - Compass with orbiting icons */}
-            <ScrollReveal direction="right" className="order-2 lg:order-1">
+            <ScrollReveal direction="right" className="order-2 lg:order-1 hidden lg:block">
               <div ref={containerRef} className="relative flex items-center justify-center w-full" style={{ minHeight: 420 }}>
                 {/* Decorative outer ring */}
                 <div className="absolute w-[380px] h-[380px] rounded-full border border-border/30" />
