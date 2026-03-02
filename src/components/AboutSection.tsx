@@ -1,4 +1,6 @@
-import { Shield, Clock, MessageSquare, Handshake, Award } from "lucide-react";
+import { useState } from "react";
+import { Shield, Clock, MessageSquare, Handshake, Award, Zap } from "lucide-react";
+import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 import CompassIcon from "@/components/CompassIcon";
 
@@ -8,9 +10,22 @@ const differentiators = [
   { icon: Shield, text: "ניסיון במקרים מורכבים" },
   { icon: Handshake, text: "קשרים בבנקים" },
   { icon: Award, text: "ליווי אישי" },
+  { icon: Zap, text: "מהירות טיפול" },
 ];
 
+// Clock positions: 12, 2, 4, 6, 8, 10 → angles in degrees (from top, clockwise)
+const clockAngles = [0, 60, 120, 180, 240, 300];
+const orbitRadius = 170; // px from center
+
 const AboutSection = () => {
+  const [needleRotation, setNeedleRotation] = useState(0);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  const handleIconClick = (index: number) => {
+    setActiveIndex(index);
+    setNeedleRotation(clockAngles[index]);
+  };
+
   return (
     <section id="about" className="py-24 lg:py-32 relative overflow-hidden">
       {/* Background pattern */}
@@ -27,31 +42,78 @@ const AboutSection = () => {
       <div className="container mx-auto px-4 lg:px-8 relative">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Visual side */}
+            {/* Visual side - Compass with orbiting icons */}
             <ScrollReveal direction="right">
-              <div className="relative flex items-center justify-center">
-                {/* Compass decoration */}
+              <div className="relative flex items-center justify-center" style={{ minHeight: 420 }}>
+                {/* Decorative outer ring */}
+                <div className="absolute w-[380px] h-[380px] rounded-full border border-border/30" />
+
+                {/* Compass center */}
                 <div className="relative">
                   <CompassIcon
                     size={280}
                     className="text-foreground/80"
+                    needleRotation={needleRotation}
                   />
-                  {/* Decorative rings */}
+                  {/* Pulsing ring */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-[200px] h-[200px] rounded-full border border-accent/20 animate-pulse-gold" />
                   </div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-[320px] h-[320px] rounded-full border border-border/30" />
-                  </div>
                 </div>
 
-                {/* Floating badges */}
-                <div className="absolute top-4 left-4 glass-card px-3 py-2 animate-float">
-                  <span className="text-xs font-semibold text-accent">ניסיון עשיר</span>
-                </div>
-                <div className="absolute bottom-8 right-0 glass-card px-3 py-2 animate-float" style={{ animationDelay: "1s" }}>
-                  <span className="text-xs font-semibold text-accent">שקיפות מלאה</span>
-                </div>
+                {/* Orbiting icons */}
+                {differentiators.map((item, i) => {
+                  const angleRad = (clockAngles[i] - 90) * (Math.PI / 180);
+                  const x = Math.cos(angleRad) * orbitRadius;
+                  const y = Math.sin(angleRad) * orbitRadius;
+                  const isActive = activeIndex === i;
+
+                  return (
+                    <motion.button
+                      key={i}
+                      className={`absolute flex flex-col items-center gap-1 cursor-pointer group focus:outline-none`}
+                      style={{
+                        left: `calc(50% + ${x}px)`,
+                        top: `calc(50% + ${y}px)`,
+                        transform: "translate(-50%, -50%)",
+                      }}
+                      onClick={() => handleIconClick(i)}
+                      animate={{
+                        y: [0, -6, 0],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: i * 0.5,
+                      }}
+                      whileHover={{ scale: 1.15 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <div
+                        className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
+                          isActive
+                            ? "bg-accent border-accent shadow-lg shadow-accent/30"
+                            : "bg-card/80 backdrop-blur-sm border-border/50 group-hover:border-accent/60"
+                        }`}
+                      >
+                        <item.icon
+                          className={`transition-colors duration-300 ${
+                            isActive ? "text-accent-foreground" : "text-accent"
+                          }`}
+                          size={20}
+                        />
+                      </div>
+                      <span
+                        className={`text-[10px] font-semibold whitespace-nowrap transition-colors duration-300 ${
+                          isActive ? "text-accent" : "text-muted-foreground"
+                        }`}
+                      >
+                        {item.text}
+                      </span>
+                    </motion.button>
+                  );
+                })}
               </div>
             </ScrollReveal>
 
@@ -81,15 +143,20 @@ const AboutSection = () => {
                 </h3>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {differentiators.map((item, i) => (
-                    <div
+                    <button
                       key={i}
-                      className="flex items-center gap-2 p-3 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors duration-300"
+                      onClick={() => handleIconClick(i)}
+                      className={`flex items-center gap-2 p-3 rounded-lg transition-colors duration-300 text-right ${
+                        activeIndex === i
+                          ? "bg-accent/15 ring-1 ring-accent/40"
+                          : "bg-secondary/50 hover:bg-secondary"
+                      }`}
                     >
                       <item.icon className="text-accent shrink-0" size={18} />
                       <span className="text-sm font-medium text-foreground">
                         {item.text}
                       </span>
-                    </div>
+                    </button>
                   ))}
                 </div>
               </ScrollReveal>
