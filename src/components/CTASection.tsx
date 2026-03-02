@@ -57,7 +57,7 @@ const CTASection = () => {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     required
-                    className="text-right bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/40"
+                    className="text-right bg-white/15 border-white/40 text-white placeholder:text-white/50 focus:border-accent"
                   />
                 </div>
                 <div>
@@ -68,7 +68,7 @@ const CTASection = () => {
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     required
-                    className="text-right bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/40"
+                    className="text-right bg-white/15 border-white/40 text-white placeholder:text-white/50 focus:border-accent"
                   />
                 </div>
               </div>
@@ -78,7 +78,7 @@ const CTASection = () => {
                   placeholder="ספרו לנו קצת על הצרכים שלכם..."
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="text-right bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/40"
+                  className="text-right bg-white/15 border-white/40 text-white placeholder:text-white/50 focus:border-accent"
                   rows={4}
                 />
               </div>
