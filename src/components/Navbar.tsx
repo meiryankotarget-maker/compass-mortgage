@@ -42,9 +42,7 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 right-0 left-0 z-50 transition-all duration-500 ${
-        isMobileMenuOpen
-          ? "bg-[#1a2540] shadow-lg"
-          : isScrolled
+        isMobileMenuOpen || isScrolled
           ? "bg-card/95 backdrop-blur-md shadow-lg border-b border-border/50"
           : "bg-transparent"
       }`}
@@ -59,12 +57,12 @@ const Navbar = () => {
             <CompassIcon
               size={36}
               className={`transition-colors duration-300 ${
-                isScrolled ? "text-accent" : "text-accent"
+                isScrolled || isMobileMenuOpen ? "text-accent" : "text-accent"
               }`}
             />
             <span
               className={`text-lg lg:text-xl font-bold transition-colors duration-300 ${
-                isScrolled ? "text-foreground" : "text-primary-foreground"
+                isScrolled || isMobileMenuOpen ? "text-foreground" : "text-primary-foreground"
               }`}
             >
               מצפן משכנתאות
@@ -102,7 +100,7 @@ const Navbar = () => {
           >
             {isMobileMenuOpen ? (
               <X
-                className={isScrolled ? "text-foreground" : "text-primary-foreground"}
+                className={isScrolled || isMobileMenuOpen ? "text-foreground" : "text-primary-foreground"}
                 size={24}
               />
             ) : (
@@ -116,13 +114,13 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden pb-4 border-t border-white/20 mt-2">
+          <div className="lg:hidden pb-4 border-t border-border/30 mt-2">
             <div className="flex flex-col gap-3 pt-4">
               {navLinks.map((link) => (
                 <button
                   key={link.href}
                   onClick={() => handleNavClick(link.href, link.isRoute)}
-                  className="text-sm font-medium text-white hover:text-accent transition-colors text-right py-2"
+                  className="text-sm font-medium text-foreground/80 hover:text-accent transition-colors text-right py-2"
                 >
                   {link.label}
                 </button>
