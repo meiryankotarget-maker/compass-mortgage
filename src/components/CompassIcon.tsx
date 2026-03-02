@@ -32,7 +32,7 @@ const CompassWithIcons = ({
   activeIndex: number | null;
   onIconClick: (i: number) => void;
 }) => {
-  const containerSize = compassSize + (orbitRadius + iconSize) * 2 + 40;
+  const containerSize = compassSize + (orbitRadius + iconSize + 20) * 2;
 
   return (
     <div
