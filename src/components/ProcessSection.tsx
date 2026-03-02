@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
-import compassBg from "@/assets/compass-bg.png";
+import CompassIcon from "@/components/CompassIcon";
 import {
   Compass,
   FolderOpen,
@@ -73,12 +73,7 @@ const ParallaxCompass = ({ scrollYProgress }: { scrollYProgress: any }) => {
       className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-[10%] pointer-events-none hidden lg:block"
       style={{ y }}
     >
-      <img
-        src={compassBg}
-        alt=""
-        className="w-[650px] h-[650px] object-contain opacity-[0.15]"
-        draggable={false}
-      />
+      <CompassIcon size={650} className="text-accent opacity-[0.12]" />
     </motion.div>
   );
 };
