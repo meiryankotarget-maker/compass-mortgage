@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Shield, Clock, MessageSquare, Handshake, Award, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -15,11 +15,25 @@ const differentiators = [
 
 // Clock positions: 12, 2, 4, 6, 8, 10 → angles in degrees (from top, clockwise)
 const clockAngles = [0, 60, 120, 180, 240, 300];
-const orbitRadius = 175; // px from center
+const orbitRadius = 160; // px from center
 
 const AboutSection = () => {
   const [needleRotation, setNeedleRotation] = useState(0);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [orbitR, setOrbitR] = useState(160);
+
+  useEffect(() => {
+    const updateRadius = () => {
+      if (containerRef.current) {
+        const w = containerRef.current.offsetWidth;
+        setOrbitR(Math.min(160, (w / 2) - 50));
+      }
+    };
+    updateRadius();
+    window.addEventListener("resize", updateRadius);
+    return () => window.removeEventListener("resize", updateRadius);
+  }, []);
 
   const handleIconClick = (index: number) => {
     setActiveIndex(index);
@@ -44,7 +58,7 @@ const AboutSection = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Visual side - Compass with orbiting icons */}
             <ScrollReveal direction="right" className="order-2 lg:order-1">
-              <div className="relative flex items-center justify-center w-full" style={{ minHeight: 420 }}>
+              <div ref={containerRef} className="relative flex items-center justify-center w-full" style={{ minHeight: 420 }}>
                 {/* Decorative outer ring */}
                 <div className="absolute w-[380px] h-[380px] rounded-full border border-border/30" />
 
@@ -64,8 +78,8 @@ const AboutSection = () => {
                 {/* Orbiting icons */}
                 {differentiators.map((item, i) => {
                   const angleRad = (clockAngles[i] - 90) * (Math.PI / 180);
-                  const x = Math.cos(angleRad) * orbitRadius;
-                  const y = Math.sin(angleRad) * orbitRadius;
+                  const x = Math.cos(angleRad) * orbitR;
+                  const y = Math.sin(angleRad) * orbitR;
                   const isActive = activeIndex === i;
 
                   return (
