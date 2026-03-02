@@ -15,7 +15,7 @@ const differentiators = [
 
 // Clock positions: 12, 2, 4, 6, 8, 10 → angles in degrees (from top, clockwise)
 const clockAngles = [0, 60, 120, 180, 240, 300];
-const orbitRadius = 170; // px from center
+const orbitRadius = 175; // px from center
 
 const AboutSection = () => {
   const [needleRotation, setNeedleRotation] = useState(0);
@@ -43,8 +43,8 @@ const AboutSection = () => {
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Visual side - Compass with orbiting icons */}
-            <ScrollReveal direction="right">
-              <div className="relative flex items-center justify-center" style={{ minHeight: 420 }}>
+            <ScrollReveal direction="right" className="order-2 lg:order-1">
+              <div className="relative flex items-center justify-center w-full" style={{ minHeight: 420 }}>
                 {/* Decorative outer ring */}
                 <div className="absolute w-[380px] h-[380px] rounded-full border border-border/30" />
 
@@ -76,6 +76,7 @@ const AboutSection = () => {
                         left: `calc(50% + ${x}px)`,
                         top: `calc(50% + ${y}px)`,
                         transform: "translate(-50%, -50%)",
+                        marginTop: "-10px",
                       }}
                       onClick={() => handleIconClick(i)}
                       animate={{
@@ -118,7 +119,7 @@ const AboutSection = () => {
             </ScrollReveal>
 
             {/* Content side */}
-            <div>
+            <div className="order-1 lg:order-2">
               <ScrollReveal>
                 <div className="flex items-center gap-3 mb-4">
                   <div className="h-px w-12 bg-accent/50" />
