@@ -71,8 +71,8 @@ const CompassWithIcons = ({
       {/* Icons - each absolutely positioned from center */}
       {differentiators.map((item, i) => {
         const angleRad = (clockAngles[i] - 90) * (Math.PI / 180);
-        const x = Math.cos(angleRad) * orbitRadius;
-        const y = Math.sin(angleRad) * orbitRadius;
+        const x = Math.cos(angleRad) * orbitRadius - 18;
+        const y = Math.sin(angleRad) * orbitRadius - 18;
         const isActive = activeIndex === i;
 
         return (
