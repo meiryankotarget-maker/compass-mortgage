@@ -97,7 +97,7 @@ const CTASection = () => {
                 className="text-base px-10 min-w-[200px] border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
                 asChild
               >
-                <a href="tel:+972500000000">
+                <a href="tel:+972556883590">
                   <Phone className="!size-5" />
                   קבע שיחת טלפון
                 </a>
@@ -110,7 +110,7 @@ const CTASection = () => {
                 asChild
               >
                 <a
-                  href="https://wa.me/972500000000"
+                  href="https://wa.me/972556883590"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
