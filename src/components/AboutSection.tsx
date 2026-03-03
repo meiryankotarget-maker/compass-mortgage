@@ -15,7 +15,7 @@ const differentiators = [
 
 const clockAngles = [0, 60, 120, 180, 240, 300];
 const orbitRadius = 215;
-const mobileOrbitRadius = 110;
+const mobileOrbitRadius = 150;
 const mobileCompassSize = 190;
 const mobileContainerSize = 320;
 const mobileCenterX = 140;
@@ -120,10 +120,10 @@ const AboutSection = () => {
           whileHover={{ scale: 1.15 }}
           whileTap={{ scale: 0.95 }}
         >
-          <div className={`w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
+          <div className={`w-11 h-11 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
             isActive ? "bg-accent border-accent shadow-lg shadow-accent/30" : "bg-card/80 backdrop-blur-sm border-border/50 group-hover:border-accent/60"
           }`}>
-            <item.icon className={`transition-colors duration-300 ${isActive ? "text-accent-foreground" : "text-accent"}`} size={14} />
+            <item.icon className={`transition-colors duration-300 ${isActive ? "text-accent-foreground" : "text-accent"}`} size={19} />
           </div>
           <span className={`text-[8px] font-semibold whitespace-nowrap transition-colors duration-300 ${isActive ? "text-accent" : "text-muted-foreground"}`}>
             {item.text}
