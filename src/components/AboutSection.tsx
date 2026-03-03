@@ -14,7 +14,7 @@ const differentiators = [
 ];
 
 const clockAngles = [0, 60, 120, 180, 240, 300];
-const orbitRadius = 175;
+const orbitRadius = 150;
 
 const AboutSection = () => {
   const [needleRotation, setNeedleRotation] = useState(0);
@@ -65,6 +65,7 @@ const AboutSection = () => {
             left: `calc(50% + ${x}px)`,
             top: `calc(50% + ${y}px)`,
             transform: "translate(-50%, -50%)",
+             marginTop: "-15px",
           }}
           onClick={() => handleIconClick(i)}
           animate={{ y: [0, -6, 0] }}
