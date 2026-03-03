@@ -96,7 +96,7 @@ const AboutSection = () => {
 </div>
 
          {/* Mobile: Compass with orbiting icons */}
-<div className="flex lg:hidden justify-center w-full">
+<div className="flex lg:hidden justify-center w-full -mt-16">
   <div style={{ position: 'relative', width: mobileContainerSize, height: mobileContainerSize }}>
     <div style={{ position: 'absolute', top: (mobileContainerSize - mobileCompassSize) / 2, left: (mobileContainerSize - mobileCompassSize) / 2 }}>
       <CompassIcon size={mobileCompassSize} className="text-foreground/80" needleRotation={needleRotation} />
@@ -120,10 +120,10 @@ const AboutSection = () => {
           whileHover={{ scale: 1.15 }}
           whileTap={{ scale: 0.95 }}
         >
-          <div className={`w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
-            isActive ? "bg-accent border-accent shadow-lg shadow-accent/30" : "bg-card/80 backdrop-blur-sm border-border/50 group-hover:border-accent/60"
+className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
+          isActive ? "bg-accent border-accent shadow-lg shadow-accent/30" : "bg-card/80 backdrop-blur-sm border-border/50 group-hover:border-accent/60"
           }`}>
-            <item.icon className={`transition-colors duration-300 ${isActive ? "text-accent-foreground" : "text-accent"}`} size={14} />
+            <item.icon className={`transition-colors duration-300 ${isActive ? "text-accent-foreground" : "text-accent"}`} size={17} />
           </div>
           <span className={`text-[8px] font-semibold whitespace-nowrap transition-colors duration-300 ${isActive ? "text-accent" : "text-muted-foreground"}`}>
             {item.text}
