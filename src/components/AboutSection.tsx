@@ -8,8 +8,8 @@ const differentiators = [
   { icon: Clock, text: "זמינות מלאה" },
   { icon: MessageSquare, text: "הסברים ברורים" },
   { icon: Handshake, text: "קשרים בבנקים" },
-  { icon: Shield, text: "ניסיון במקרים" },
   { icon: Award, text: "ליווי אישי" },
+  { icon: Shield, text: "ניסיון במקרים" },
   { icon: Zap, text: "מהירות טיפול" },
 ];
 
