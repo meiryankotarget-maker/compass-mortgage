@@ -9,7 +9,7 @@ const differentiators = [
   { icon: MessageSquare, text: "הסברים ברורים" },
   { icon: Handshake, text: "קשרים בבנקים" },
   { icon: Award, text: "ליווי אישי" },
-  { icon: Shield, text: "ניסיון במקרים" },
+  { icon: Shield, text: "ניסיון במקרים מורכבים" },
   { icon: Zap, text: "מהירות טיפול" },
 ];
 
