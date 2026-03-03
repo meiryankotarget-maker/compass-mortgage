@@ -14,11 +14,8 @@ const CompassIcon = ({ size = 48, className = "", needleRotation }: CompassIconP
     fill="none"
     className={className}
   >
-    {/* Outer ring */}
     <circle cx="50" cy="50" r="46" stroke="currentColor" strokeWidth="1.5" opacity="0.3" />
     <circle cx="50" cy="50" r="42" stroke="currentColor" strokeWidth="1" opacity="0.15" />
-
-    {/* Tick marks */}
     {Array.from({ length: 36 }).map((_, i) => {
       const angle = (i * 10 * Math.PI) / 180;
       const isMajor = i % 9 === 0;
@@ -37,28 +34,18 @@ const CompassIcon = ({ size = 48, className = "", needleRotation }: CompassIconP
         />
       );
     })}
-
-    {/* Cross lines */}
     <line x1="50" y1="12" x2="50" y2="88" stroke="currentColor" strokeWidth="0.5" opacity="0.1" />
     <line x1="12" y1="50" x2="88" y2="50" stroke="currentColor" strokeWidth="0.5" opacity="0.1" />
-
-    {/* Needle group with rotation */}
     <motion.g
       animate={{ rotate: needleRotation ?? 0 }}
       transition={{ type: "spring", stiffness: 60, damping: 15, mass: 1.2 }}
       style={{ transformOrigin: "50px 50px" }}
     >
-      {/* North needle - Gold */}
       <polygon points="50,14 44,48 56,48" fill="hsl(38 80% 52%)" />
-      {/* South needle - Dark */}
       <polygon points="50,86 44,52 56,52" fill="currentColor" opacity="0.25" />
-      {/* East needle */}
       <polygon points="86,50 52,44 52,56" fill="currentColor" opacity="0.15" />
-      {/* West needle */}
       <polygon points="14,50 48,44 48,56" fill="currentColor" opacity="0.15" />
     </motion.g>
-
-    {/* Center circle */}
     <circle cx="50" cy="50" r="5" fill="hsl(38 80% 52%)" />
     <circle cx="50" cy="50" r="3" fill="hsl(38 80% 38%)" />
   </svg>
