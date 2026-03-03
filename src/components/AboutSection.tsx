@@ -17,9 +17,9 @@ const clockAngles = [0, 60, 120, 180, 240, 300];
 const orbitRadius = 215;
 const mobileOrbitRadius = 150;
 const mobileCompassSize = 210;
-const mobileContainerSize = 380;
-const mobileCenterX = 195;
-const mobileCenterY = 165;
+const mobileContainerSize = 320;
+const mobileCenterX = 135;
+const mobileCenterY = 155;
 const AboutSection = () => {
   const [needleRotation, setNeedleRotation] = useState(0);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
