@@ -11,10 +11,19 @@ const CTASection = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({ name: "", phone: "", message: "" });
 
-  const handleSubmit = (e: React.FormEvent) => {
+const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({ title: "הפרטים נשלחו בהצלחה!", description: "ניצור אתכם קשר בהקדם." });
-    setFormData({ name: "", phone: "", message: "" });
+    try {
+      await fetch("https://hook.eu1.make.com/hu8196r3tcaq73r2xfi9w8tvdhffes8i", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      toast({ title: "הפרטים נשלחו בהצלחה!", description: "ניצור אתכם קשר בהקדם." });
+      setFormData({ name: "", phone: "", message: "" });
+    } catch {
+      toast({ title: "שגיאה", description: "אנא נסו שוב." });
+    }
   };
 
   return (
