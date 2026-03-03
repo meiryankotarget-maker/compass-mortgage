@@ -1,3 +1,5 @@
+import fixedVsVariableImg from "@/assets/fixed-vs-variable-rate.png";
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -22,7 +24,7 @@ export const blogPosts: BlogPost[] = [
     ],
     date: "2026-03-01",
     readTime: "4 דקות קריאה",
-    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80",
+    image: fixedVsVariableImg,
   },
   {
     slug: "ai-revolution-mortgage",
