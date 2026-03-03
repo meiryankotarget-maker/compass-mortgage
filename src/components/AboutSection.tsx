@@ -14,7 +14,7 @@ const differentiators = [
 ];
 
 const clockAngles = [0, 60, 120, 180, 240, 300];
-const orbitRadius = 190;
+const orbitRadius = 200;
 const mobileOrbitRadius = 110;
 const mobileCompassSize = 190;
 const mobileContainerSize = 320;
