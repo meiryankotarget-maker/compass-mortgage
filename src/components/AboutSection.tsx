@@ -14,7 +14,7 @@ const differentiators = [
 ];
 
 const clockAngles = [0, 60, 120, 180, 240, 300];
-const orbitRadius = 175;
+const orbitRadius = 220;
 
 const AboutSection = () => {
   const [needleRotation, setNeedleRotation] = useState(0);
@@ -41,7 +41,7 @@ const AboutSection = () => {
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <ScrollReveal direction="right" className="order-2 lg:order-1">
-              <div className="relative flex items-center justify-center w-full" style={{ minHeight: 420 }}>
+              <div className="relative flex items-center justify-center w-full" style={{ minHeight: 520 }}>
                 <div className="absolute w-[380px] h-[380px] rounded-full border border-border/30" />
                 <div className="relative">
                   <CompassIcon size={280} className="text-foreground/80" needleRotation={needleRotation} />
@@ -62,7 +62,7 @@ const AboutSection = () => {
                         left: `calc(50% + ${x}px)`,
                         top: `calc(50% + ${y}px)`,
                         transform: "translate(-50%, -50%)",
-                        marginTop: "-10px",
+                        
                       }}
                       onClick={() => handleIconClick(i)}
                       animate={{ y: [0, -6, 0] }}
