@@ -15,11 +15,11 @@ const differentiators = [
 
 const clockAngles = [0, 60, 120, 180, 240, 300];
 const orbitRadius = 215;
-const mobileOrbitRadius = 150;
+const mobileOrbitRadius = 130;
 const mobileCompassSize = 210;
-const mobileContainerSize = 320;
-const mobileCenterX = 135;
-const mobileCenterY = 155;
+const mobileContainerSize = 400;
+const mobileCenterX = 160;
+const mobileCenterY = 180;
 const AboutSection = () => {
   const [needleRotation, setNeedleRotation] = useState(0);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -98,7 +98,7 @@ const AboutSection = () => {
          {/* Mobile: Compass with orbiting icons */}
 <div className="flex lg:hidden justify-center w-full -mt-10">
   <div style={{ position: 'relative', width: mobileContainerSize, height: mobileContainerSize }}>
-<div style={{ position: 'absolute', top: (mobileContainerSize - mobileCompassSize) / 2 + 20, left: (mobileContainerSize - mobileCompassSize) / 2 }}>      <CompassIcon size={mobileCompassSize} className="text-foreground/80" needleRotation={needleRotation} />
+<div style={{ position: 'absolute', top: (mobileContainerSize - mobileCompassSize) / 2, left: (mobileContainerSize - mobileCompassSize) / 2 }}>      <CompassIcon size={mobileCompassSize} className="text-foreground/80" needleRotation={needleRotation} />
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="rounded-full border border-accent/20 animate-pulse-gold" style={{ width: mobileCompassSize * 0.71, height: mobileCompassSize * 0.71 }} />
       </div>
