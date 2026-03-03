@@ -44,26 +44,31 @@ const AboutSection = () => {
 
 {/* Desktop: Compass with orbiting icons */}
 <div className="hidden lg:flex relative items-center justify-center w-full" style={{ minHeight: 420 }}>
-  <div className="absolute w-[380px] h-[380px] rounded-full border border-border/30" />
-  <div className="relative flex items-center justify-center" style={{ width: 420, height: 420 }}>
-    <div className="absolute" style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+  <div style={{ position: 'relative', width: 420, height: 420 }}>
+    {/* Decorative ring */}
+    <div className="absolute rounded-full border border-border/30" style={{ width: 380, height: 380, top: 20, left: 20 }} />
+    
+    {/* Compass - perfectly centered */}
+    <div style={{ position: 'absolute', top: 70, left: 70 }}>
       <CompassIcon size={280} className="text-foreground/80" needleRotation={needleRotation} />
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="w-[200px] h-[200px] rounded-full border border-accent/20 animate-pulse-gold" />
       </div>
     </div>
+
+    {/* Orbiting icons - centered on 210,210 (center of 420x420) */}
     {differentiators.map((item, i) => {
-const angleRad = (clockAngles[i] - 90) * (Math.PI / 180);
-const x = Math.cos(angleRad) * orbitRadius;
-const y = Math.sin(angleRad) * orbitRadius - 25;
+      const angleRad = (clockAngles[i] - 90) * (Math.PI / 180);
+      const x = Math.cos(angleRad) * orbitRadius;
+      const y = Math.sin(angleRad) * orbitRadius;
       const isActive = activeIndex === i;
       return (
         <motion.button
           key={i}
           className="absolute flex flex-col items-center gap-1 cursor-pointer group focus:outline-none"
           style={{
-            left: `calc(50% + ${x}px)`,
-            top: `calc(50% + ${y}px)`,
+            left: 210 + x,
+            top: 210 + y,
             transform: "translate(-50%, -50%)",
           }}
           onClick={() => handleIconClick(i)}
