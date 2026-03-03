@@ -53,9 +53,9 @@ const AboutSection = () => {
       </div>
     </div>
     {differentiators.map((item, i) => {
-      const angleRad = (clockAngles[i] - 90) * (Math.PI / 180);
-      const x = Math.cos(angleRad) * orbitRadius;
-      const y = Math.sin(angleRad) * orbitRadius;
+const angleRad = (clockAngles[i] - 90) * (Math.PI / 180);
+const x = Math.cos(angleRad) * orbitRadius;
+const y = Math.sin(angleRad) * orbitRadius - 25;
       const isActive = activeIndex === i;
       return (
         <motion.button
@@ -65,7 +65,6 @@ const AboutSection = () => {
             left: `calc(50% + ${x}px)`,
             top: `calc(50% + ${y}px)`,
             transform: "translate(-50%, -50%)",
-             marginTop: "-50px",
           }}
           onClick={() => handleIconClick(i)}
           animate={{ y: [0, -6, 0] }}
