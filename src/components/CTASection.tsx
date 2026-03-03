@@ -69,17 +69,26 @@ const handleSubmit = async (e: React.FormEvent) => {
                     className="text-right bg-white border-gray-400 text-gray-900 placeholder:text-gray-400"
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-800 mb-1.5">טלפון</label>
-                  <Input
-                    placeholder="050-0000000"
-                    type="tel"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    required
-                    className="text-right bg-white border-gray-400 text-gray-900 placeholder:text-gray-400"
-                  />
-                </div>
+            <div>
+  <label className="block text-sm font-medium text-gray-800 mb-1.5">טלפון</label>
+  <Input
+    placeholder="050-0000000"
+    type="tel"
+    value={formData.phone}
+    onChange={(e) => {
+      const value = e.target.value.replace(/\D/g, "");
+      let formatted = value;
+      if (value.startsWith("05") || value.startsWith("07")) {
+        if (value.length > 3) formatted = value.slice(0, 3) + "-" + value.slice(3, 10);
+      } else {
+        if (value.length > 2) formatted = value.slice(0, 2) + "-" + value.slice(2, 9);
+      }
+      setFormData({ ...formData, phone: formatted });
+    }}
+    required
+    className="text-right bg-white border-gray-400 text-gray-900 placeholder:text-gray-400"
+  />
+</div>
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-800 mb-1.5">הודעה (אופציונלי)</label>
