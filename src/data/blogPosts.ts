@@ -1,3 +1,5 @@
+import fixedVsVariableImg from "@/assets/fixed-vs-variable-rate.png";
+
 export interface BlogPost {
   slug: string;
   title: string;
