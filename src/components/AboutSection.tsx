@@ -120,8 +120,8 @@ const AboutSection = () => {
           whileHover={{ scale: 1.15 }}
           whileTap={{ scale: 0.95 }}
         >
-className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
-          isActive ? "bg-accent border-accent shadow-lg shadow-accent/30" : "bg-card/80 backdrop-blur-sm border-border/50 group-hover:border-accent/60"}`}
+className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${isActive ? "bg-accent border-accent shadow-lg shadow-accent/30" : "bg-card/80 backdrop-blur-sm border-border/50 group-hover:border-accent/60"}`}
+>
             <item.icon className={`transition-colors duration-300 ${isActive ? "text-accent-foreground" : "text-accent"}`} size={17} />
           </div>
           <span className={`text-[8px] font-semibold whitespace-nowrap transition-colors duration-300 ${isActive ? "text-accent" : "text-muted-foreground"}`}>
