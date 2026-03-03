@@ -42,47 +42,49 @@ const AboutSection = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <ScrollReveal direction="right" className="order-2 lg:order-1">
 
-              {/* Desktop: Compass with orbiting icons */}
-              <div className="hidden lg:flex relative items-center justify-center w-full" style={{ minHeight: 420 }}>
-                <div className="absolute w-[380px] h-[380px] rounded-full border border-border/30" />
-                <div className="relative" style={{ width: 280, height: 280 }}>
-                  <CompassIcon size={280} className="text-foreground/80" needleRotation={needleRotation} />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-[200px] h-[200px] rounded-full border border-accent/20 animate-pulse-gold" />
-                  </div>
-                  {differentiators.map((item, i) => {
-                    const angleRad = (clockAngles[i] - 90) * (Math.PI / 180);
-                    const x = Math.cos(angleRad) * orbitRadius;
-                    const y = Math.sin(angleRad) * orbitRadius;
-                    const isActive = activeIndex === i;
-                    return (
-                      <motion.button
-                        key={i}
-                        className="absolute flex flex-col items-center gap-1 cursor-pointer group focus:outline-none"
-                        style={{
-                          left: `calc(50% + ${x}px)`,
-                          top: `calc(50% + ${y}px)`,
-                          transform: "translate(-50%, -50%)",
-                        }}
-                        onClick={() => handleIconClick(i)}
-                        animate={{ y: [0, -6, 0] }}
-                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }}
-                        whileHover={{ scale: 1.15 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
-                          isActive ? "bg-accent border-accent shadow-lg shadow-accent/30" : "bg-card/80 backdrop-blur-sm border-border/50 group-hover:border-accent/60"
-                        }`}>
-                          <item.icon className={`transition-colors duration-300 ${isActive ? "text-accent-foreground" : "text-accent"}`} size={20} />
-                        </div>
-                        <span className={`text-[10px] font-semibold whitespace-nowrap transition-colors duration-300 ${isActive ? "text-accent" : "text-muted-foreground"}`}>
-                          {item.text}
-                        </span>
-                      </motion.button>
-                    );
-                  })}
-                </div>
-              </div>
+{/* Desktop: Compass with orbiting icons */}
+<div className="hidden lg:flex relative items-center justify-center w-full" style={{ minHeight: 420 }}>
+  <div className="absolute w-[380px] h-[380px] rounded-full border border-border/30" />
+  <div className="relative flex items-center justify-center" style={{ width: 420, height: 420 }}>
+    <div className="absolute" style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+      <CompassIcon size={280} className="text-foreground/80" needleRotation={needleRotation} />
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="w-[200px] h-[200px] rounded-full border border-accent/20 animate-pulse-gold" />
+      </div>
+    </div>
+    {differentiators.map((item, i) => {
+      const angleRad = (clockAngles[i] - 90) * (Math.PI / 180);
+      const x = Math.cos(angleRad) * orbitRadius;
+      const y = Math.sin(angleRad) * orbitRadius;
+      const isActive = activeIndex === i;
+      return (
+        <motion.button
+          key={i}
+          className="absolute flex flex-col items-center gap-1 cursor-pointer group focus:outline-none"
+          style={{
+            left: `calc(50% + ${x}px)`,
+            top: `calc(50% + ${y}px)`,
+            transform: "translate(-50%, -50%)",
+          }}
+          onClick={() => handleIconClick(i)}
+          animate={{ y: [0, -6, 0] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }}
+          whileHover={{ scale: 1.15 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
+            isActive ? "bg-accent border-accent shadow-lg shadow-accent/30" : "bg-card/80 backdrop-blur-sm border-border/50 group-hover:border-accent/60"
+          }`}>
+            <item.icon className={`transition-colors duration-300 ${isActive ? "text-accent-foreground" : "text-accent"}`} size={20} />
+          </div>
+          <span className={`text-[10px] font-semibold whitespace-nowrap transition-colors duration-300 ${isActive ? "text-accent" : "text-muted-foreground"}`}>
+            {item.text}
+          </span>
+        </motion.button>
+      );
+    })}
+  </div>
+</div>
 
               {/* Mobile: Compass + grid below */}
               <div className="flex lg:hidden flex-col items-center gap-6 w-full">
