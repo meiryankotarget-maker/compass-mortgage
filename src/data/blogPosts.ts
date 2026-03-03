@@ -22,7 +22,7 @@ export const blogPosts: BlogPost[] = [
     ],
     date: "2026-03-01",
     readTime: "4 דקות קריאה",
-    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80",
+    image: new URL("@/assets/fixed-vs-variable-rate.png", import.meta.url).href,
   },
   {
     slug: "ai-revolution-mortgage",
