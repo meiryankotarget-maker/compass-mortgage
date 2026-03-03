@@ -96,7 +96,7 @@ const AboutSection = () => {
 </div>
 
          {/* Mobile: Compass with orbiting icons */}
-<div className="flex lg:hidden justify-center w-full -mt-32">
+<div className="flex lg:hidden justify-center w-full -mt-16">
   <div style={{ position: 'relative', width: mobileContainerSize, height: mobileContainerSize }}>
     <div style={{ position: 'absolute', top: (mobileContainerSize - mobileCompassSize) / 2, left: (mobileContainerSize - mobileCompassSize) / 2 }}>
       <CompassIcon size={mobileCompassSize} className="text-foreground/80" needleRotation={needleRotation} />
