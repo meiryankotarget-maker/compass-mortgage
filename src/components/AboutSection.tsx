@@ -18,8 +18,8 @@ const orbitRadius = 190;
 const mobileOrbitRadius = 110;
 const mobileCompassSize = 190;
 const mobileContainerSize = 320;
-const mobileCenterX = 130;
-const mobileCenterY = 120;
+const mobileCenterX = 140;
+const mobileCenterY = 140;
 const AboutSection = () => {
   const [needleRotation, setNeedleRotation] = useState(0);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
