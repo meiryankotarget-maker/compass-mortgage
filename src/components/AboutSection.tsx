@@ -7,8 +7,8 @@ import CompassIcon from "@/components/CompassIcon";
 const differentiators = [
   { icon: Clock, text: "זמינות מלאה" },
   { icon: MessageSquare, text: "הסברים ברורים" },
-  { icon: Shield, text: "ניסיון במקרים מורכבים" },
   { icon: Handshake, text: "קשרים בבנקים" },
+  { icon: Shield, text: "ניסיון במקרים מורכבים" },
   { icon: Award, text: "ליווי אישי" },
   { icon: Zap, text: "מהירות טיפול" },
 ];
@@ -98,8 +98,7 @@ const AboutSection = () => {
          {/* Mobile: Compass with orbiting icons */}
 <div className="flex lg:hidden justify-center w-full -mt-10">
   <div style={{ position: 'relative', width: mobileContainerSize, height: mobileContainerSize }}>
-    <div style={{ position: 'absolute', top: (mobileContainerSize - mobileCompassSize) / 2, left: (mobileContainerSize - mobileCompassSize) / 2 }}>
-      <CompassIcon size={mobileCompassSize} className="text-foreground/80" needleRotation={needleRotation} />
+<div style={{ position: 'absolute', top: (mobileContainerSize - mobileCompassSize) / 2 + 20, left: (mobileContainerSize - mobileCompassSize) / 2 }}>      <CompassIcon size={mobileCompassSize} className="text-foreground/80" needleRotation={needleRotation} />
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="rounded-full border border-accent/20 animate-pulse-gold" style={{ width: mobileCompassSize * 0.71, height: mobileCompassSize * 0.71 }} />
       </div>
