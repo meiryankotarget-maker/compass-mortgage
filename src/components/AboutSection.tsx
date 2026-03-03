@@ -65,7 +65,7 @@ const AboutSection = () => {
             left: `calc(50% + ${x}px)`,
             top: `calc(50% + ${y}px)`,
             transform: "translate(-50%, -50%)",
-             marginTop: "-30px",
+             marginTop: "-50px",
           }}
           onClick={() => handleIconClick(i)}
           animate={{ y: [0, -6, 0] }}
