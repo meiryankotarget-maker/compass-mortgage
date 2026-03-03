@@ -15,7 +15,11 @@ const differentiators = [
 
 const clockAngles = [0, 60, 120, 180, 240, 300];
 const orbitRadius = 190;
-
+const mobileOrbitRadius = 110;
+const mobileCompassSize = 150;
+const mobileContainerSize = 280;
+const mobileCenterX = 140;
+const mobileCenterY = 130;
 const AboutSection = () => {
   const [needleRotation, setNeedleRotation] = useState(0);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -91,37 +95,44 @@ const AboutSection = () => {
   </div>
 </div>
 
-              {/* Mobile: Compass + grid below */}
-              <div className="flex lg:hidden flex-col items-center gap-6 w-full">
-                <div className="relative flex items-center justify-center" style={{ width: 220, height: 220 }}>
-                  <CompassIcon size={220} className="text-foreground/80" needleRotation={needleRotation} />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-[155px] h-[155px] rounded-full border border-accent/20 animate-pulse-gold" />
-                  </div>
-                </div>
-                <div className="grid grid-cols-3 gap-3 w-full">
-                  {differentiators.map((item, i) => {
-                    const isActive = activeIndex === i;
-                    return (
-                      <button
-                        key={i}
-                        onClick={() => handleIconClick(i)}
-                        className={`flex flex-col items-center gap-2 p-3 rounded-lg transition-colors duration-300 ${
-                          isActive ? "bg-accent/15 ring-1 ring-accent/40" : "bg-secondary/50 hover:bg-secondary"
-                        }`}
-                      >
-                        <div className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
-                          isActive ? "bg-accent border-accent" : "bg-card/80 border-border/50"
-                        }`}>
-                          <item.icon className={`transition-colors duration-300 ${isActive ? "text-accent-foreground" : "text-accent"}`} size={18} />
-                        </div>
-                        <span className="text-[10px] font-semibold text-center leading-tight text-muted-foreground">{item.text}</span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
+         {/* Mobile: Compass with orbiting icons */}
+<div className="flex lg:hidden justify-center w-full">
+  <div style={{ position: 'relative', width: mobileContainerSize, height: mobileContainerSize }}>
+    <div style={{ position: 'absolute', top: (mobileContainerSize - mobileCompassSize) / 2, left: (mobileContainerSize - mobileCompassSize) / 2 }}>
+      <CompassIcon size={mobileCompassSize} className="text-foreground/80" needleRotation={needleRotation} />
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="rounded-full border border-accent/20 animate-pulse-gold" style={{ width: mobileCompassSize * 0.71, height: mobileCompassSize * 0.71 }} />
+      </div>
+    </div>
+    {differentiators.map((item, i) => {
+      const angleRad = (clockAngles[i] - 90) * (Math.PI / 180);
+      const x = Math.cos(angleRad) * mobileOrbitRadius;
+      const y = Math.sin(angleRad) * mobileOrbitRadius;
+      const isActive = activeIndex === i;
+      return (
+        <motion.button
+          key={i}
+          className="absolute flex flex-col items-center gap-1 cursor-pointer group focus:outline-none"
+          style={{ left: mobileCenterX + x, top: mobileCenterY + y, transform: "translate(-50%, -50%)" }}
+          onClick={() => handleIconClick(i)}
+          animate={{ y: [0, -4, 0] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }}
+          whileHover={{ scale: 1.15 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <div className={`w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
+            isActive ? "bg-accent border-accent shadow-lg shadow-accent/30" : "bg-card/80 backdrop-blur-sm border-border/50 group-hover:border-accent/60"
+          }`}>
+            <item.icon className={`transition-colors duration-300 ${isActive ? "text-accent-foreground" : "text-accent"}`} size={14} />
+          </div>
+          <span className={`text-[8px] font-semibold whitespace-nowrap transition-colors duration-300 ${isActive ? "text-accent" : "text-muted-foreground"}`}>
+            {item.text}
+          </span>
+        </motion.button>
+      );
+    })}
+  </div>
+</div>
             </ScrollReveal>
 
             <div className="order-1 lg:order-2">
