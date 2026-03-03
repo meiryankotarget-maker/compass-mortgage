@@ -14,7 +14,7 @@ const differentiators = [
 ];
 
 const clockAngles = [0, 60, 120, 180, 240, 300];
-const orbitRadius = 140;
+const orbitRadius = 160;
 
 const AboutSection = () => {
   const [needleRotation, setNeedleRotation] = useState(0);
@@ -67,8 +67,8 @@ const AboutSection = () => {
           key={i}
           className="absolute flex flex-col items-center gap-1 cursor-pointer group focus:outline-none"
           style={{
-            left: 210 + x,
-            top: 210 + y,
+            left: 200 + x,
+            top: 200 + y,
             transform: "translate(-50%, -50%)",
           }}
           onClick={() => handleIconClick(i)}
