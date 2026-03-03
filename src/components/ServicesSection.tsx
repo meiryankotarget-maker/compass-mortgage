@@ -119,7 +119,7 @@ const StickyContactBar = () => (
   <div className="sticky bottom-0 z-50 bg-navy-dark/95 backdrop-blur-md border-t border-white/10">
     <div className="container mx-auto px-4 py-3 flex items-center justify-center gap-3 flex-wrap">
       <a
-        href="#contact"
+        href="#cta"
         className="bg-gold-gradient text-navy-dark font-bold px-6 py-2.5 rounded-full flex items-center gap-2 text-sm hover:opacity-90 transition-opacity shadow-lg shadow-gold/20"
       >
         <MapPin size={16} />
