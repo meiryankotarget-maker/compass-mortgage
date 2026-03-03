@@ -16,10 +16,10 @@ const differentiators = [
 const clockAngles = [0, 60, 120, 180, 240, 300];
 const orbitRadius = 190;
 const mobileOrbitRadius = 110;
-const mobileCompassSize = 150;
-const mobileContainerSize = 280;
-const mobileCenterX = 140;
-const mobileCenterY = 130;
+const mobileCompassSize = 160;
+const mobileContainerSize = 320;
+const mobileCenterX = 110;
+const mobileCenterY = 100;
 const AboutSection = () => {
   const [needleRotation, setNeedleRotation] = useState(0);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
