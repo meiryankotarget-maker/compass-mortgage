@@ -103,7 +103,7 @@ const ServiceCard = ({ service, index }: ServiceCardProps) => (
 
       {/* Content */}
   <h4 className="text-lg font-bold text-white mb-2 block">{service.title}</h4>
-<p className="text-sm text-white/50 leading-relaxed mt-1">{service.description}</p>
+<p className="text-sm text-white/50 leading-relaxed whitespace-pre-line">{service.description}</p>
       {/* CTA hint */}
       <div className="mt-5 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         <span className="text-xs text-accent font-medium">קרא עוד</span>
