@@ -38,7 +38,7 @@ const Blog = () => {
             </Link>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
-            <p className="text-accent text-sm font-medium mb-2">הבלוג שלנו</p>
+            <p className="text-accent text-sm font-medium mb-2">מרכז הידע למשכנתאות</p>
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-4">
               תובנות מהשטח
             </h1>
