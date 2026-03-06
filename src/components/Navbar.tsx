@@ -10,7 +10,7 @@ const navLinks: { label: string; href: string; isRoute?: boolean }[] = [
   { label: "תהליך עבודה", href: "#process" },
   { label: "אודות", href: "#about" },
   { label: "שאלות נפוצות", href: "#faq" },
-  { label: "בלוג", href: "/blog", isRoute: true },
+ { label: "מרכז הידע למשכנתאות", href: "/blog", isRoute: true },
 ];
 
 const Navbar = () => {
