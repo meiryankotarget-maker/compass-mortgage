@@ -76,9 +76,9 @@ const ServicePage = () => {
           </ScrollReveal>
 
           <ScrollReveal delay={0.2}>
-            <p className="text-lg text-primary-foreground/60 max-w-2xl">
-              {service.description}
-            </p>
+         <p className="text-lg text-primary-foreground/60 max-w-2xl whitespace-pre-line">
+  {service.description}
+</p>
           </ScrollReveal>
         </div>
       </section>
